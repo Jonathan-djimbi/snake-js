@@ -1,0 +1,55 @@
+::before,
+::after,
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#canvasDiv {
+    display: flex;
+    width: 100%;
+
+    margin: 0 auto;
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    display: none;
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.space {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+#space {
+    background-color: brown;
+}
+
+@media screen and (max-width: 500px) {
+    button {
+        display: block;
+        height: 50px;
+        width: 70px;
+    }
+
+}
