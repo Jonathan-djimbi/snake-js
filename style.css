@@ -1,55 +1,105 @@
-::before,
-::after,
+:root {
+    --sv-brown-light: #e0ac69;
+    --sv-brown-dark: #8b4513;
+    --sv-ui-bg: #ffae68;
+    --sv-ui-border: #6a3e14;
+    --sv-text-color: #522d0b;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-#canvasDiv {
-    display: flex;
-    width: 100%;
-
-    margin: 0 auto;
+    font-family: 'VT323', monospace;
+    touch-action: none; /* Prevents default touch actions like scroll */
 }
 
 body {
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     overflow: hidden;
+    background-color: #2c2c2c;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("data:image/svg+xml,%3Csvg width='42' height='44' viewBox='0 0 42 44' xmlns='http://www.w3.org/2000/svg'%3E%3Cg id='Page-1' fill='none' fill-rule='evenodd'%3E%3Cg id='brick-wall' fill='%23454545' fill-opacity='0.4'%3E%3Cpath d='M0 0h42v44H0V0zm1 1h40v20H1V1zM0 22h20v20H0V22zm22 0h20v20H22V22z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
 
-.btnContainer {
+.game-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+    padding: 10px;
+}
+
+.ui-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    background: var(--sv-ui-bg);
+    border: 4px solid var(--sv-ui-border);
+    border-radius: 8px;
+    box-shadow: 4px 4px 0px rgba(0,0,0,0.5);
+    color: var(--sv-text-color);
+    font-size: 1.5rem;
+}
+
+#canvasDiv {
+    position: relative;
+    border: 6px solid var(--sv-brown-dark);
+    border-radius: 4px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    background-color: #000;
+}
+
+canvas {
+    display: block;
+    image-rendering: pixelated; /* Essential for pixel art look */
+}
+
+/* Hide default controls on larger screens if we want a clean look,
+   but keep them for accessibility/testing if touch isn't available */
+.btnContainer, .space {
+    margin-top: 15px;
 }
 
 button {
-    display: none;
-    border-radius: 10px;
-    margin: 5px;
+    background-color: var(--sv-ui-bg);
+    border: 2px solid var(--sv-ui-border);
+    color: var(--sv-text-color);
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.3);
 }
 
-.space {
+button:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}
+
+.upDown {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
+    flex-direction: column;
 }
 
-#space {
-    background-color: brown;
-}
-
-@media screen and (max-width: 500px) {
-    button {
-        display: block;
-        height: 50px;
-        width: 70px;
+/* Mobile Responsiveness */
+@media screen and (max-width: 600px) {
+    .ui-header {
+        font-size: 1.2rem;
+        padding: 5px 10px;
     }
 
+    /* Hide on-screen buttons on mobile if swipe is primary,
+       but user might want them. Let's make them smaller or hide them if swipe works well.
+       For now, let's hide them to encourage swipe as per 'modern app' feel. */
+    .btnContainer, .space {
+        display: none;
+    }
 }
